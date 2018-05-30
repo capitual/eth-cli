@@ -13,13 +13,13 @@ Installing
 Globally (for command line usage):
 
 ```
-npm i ethereum-cli -g
+npm i node-ethereum-wallet -g
 ```
 
 As a local module (for JS library usage):
 
 ```
-npm i ethereum-cli
+npm i node-ethereum-wallet
 ```
 
 Command-line Help
@@ -27,26 +27,26 @@ Command-line Help
 
 The `ethereum-cli` command will be available on your shell. The following arguments are available:
 
-Command | Arguments | Description
---------+-----------+------------
-  --getaddress 🔑 | | Show your wallet's main address
-  --getnewaddress 🔑 | | Generates a new address and shows it
-  --listaddresses 🔑 | | Lists all your generated addresses
-  --privatekeytoaddress | _privateKey_ | Converts a private key to address
-  --dumpprivkey 🔑 | _wallet_ | Shows the private key of one of your wallet addresses
-  --dumpwallet 🔑 | | Lists every private key of your wallet addresses
-  --dumpseed 🔑 | | Shows your seed (mnemonic phrase)
-  --getreceivedbyaddress | _address_ [--minconf _minimumConfirmations = 0_] | Get an address' balance
-  --getbalance 🔑 | | Get your account's balance (all wallets summed up)
-  --getgasprice | | Get current gas price
-  --getblockcount | | Get current block's number
-  --getblock | _blockNumberOrHash_ | Get a block's data
-  --gettransaction | _txid_ | Get a transaction's data
-  --backupwallet 🔑 | _file_ | Backups your wallet onto file
-  --createrawtransaction 🔑 | _to_ --from _from_ --amount _amount_ [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Returns an hex-encoded raw transaction
-  --signrawtransaction 🔑 | _hexRawTransaction_ --from _from_ | Returns the hex-encoded raw transaction, signed by from
-  --sendrawtransaction | _hexRawSignedTransaction_ | Pushes a raw transaction to the network
-  --sendtoaddress 🔑 | _to_ --from _from_ --amount _amount_ [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Sends a transaction and returns its transaction ID
+Command                   | Arguments                                                                            | Description
+--------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------
+--getaddress 🔑           |                                                                                      | Show your wallet's main address
+--getnewaddress 🔑        |                                                                                      | Generates a new address and shows it
+--listaddresses 🔑        |                                                                                      | Lists all your generated addresses
+--privatekeytoaddress     | _privateKey_                                                                         | Converts a private key to address
+--dumpprivkey 🔑          | _wallet_                                                                             | Shows the private key of one of your wallet addresses
+--dumpwallet 🔑           |                                                                                      | Lists every private key of your wallet addresses
+--dumpseed 🔑             |                                                                                      | Shows your seed (mnemonic phrase)
+--getreceivedbyaddress    | _address_ [--minconf _minimumConfirmations = 0_]                                     | Get an address' balance
+--getbalance 🔑           |                                                                                      | Get your account's balance (all wallets summed up)
+--getgasprice             |                                                                                      | Get current gas price
+--getblockcount           |                                                                                      | Get current block's number
+--getblock                | _blockNumberOrHash_                                                                  | Get a block's data
+--gettransaction          | _txid_                                                                               | Get a transaction's data
+--backupwallet 🔑         | _file_                                                                               | Backups your wallet onto file
+--createrawtransaction 🔑 | _to_ --from _from_ --amount _amount_ [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Returns an hex-encoded raw transaction
+--signrawtransaction 🔑   | _hexRawTransaction_ --from _from_                                                    | Returns the hex-encoded raw transaction, signed by from
+--sendrawtransaction      | _hexRawSignedTransaction_                                                            | Pushes a raw transaction to the network
+--sendtoaddress 🔑        | _to_ --from _from_ --amount _amount_ [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Sends a transaction and returns its transaction ID
 
 ### Global options
 
@@ -81,13 +81,13 @@ Library Help
 This project also exposes a Javascript class, which you can use in your NodeJS or browser projects. It can be included on NodeJS using require:
 
 ```javascript
-const EthereumWallet = require('ethereum-cli')
+const EthereumWallet = require('node-ethereum-wallet')
 ```
 
 On browsers, you can include it using `<script>`, and the global class `EthereumWallet` will be available.
 
 ```html
-<script src="./node_modules/ethereum-cli/lib/index.js"></script>
+<script src="./node_modules/node-ethereum-wallet/lib/index.js"></script>
 ```
 ### Initializing
 
