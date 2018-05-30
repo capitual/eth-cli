@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ethereum wallet for command line, NodeJS and the browser">
+    <title>Node Ethereum Wallet (ethereum-cli)</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div id="layout">
+        <div id="main">
+            <div class="header">
+                <h1>Node Ethereum Wallet</h1>
+                <h2>ethereum-cli</h2>
+            </div>
+            <div class="content">
+                <h1><a id="ethereumcli_0"></a>ethereum-cli</h1>
+                <p>An Ethereum wallet for Node, browsers and command-line.</p>
+                <p>Powered by <a href="https://github.com/ethereum/web3.js">web3.js</a> and <a href="https://github.com/ConsenSys/eth-lightwallet">eth-lightwallet</a>.</p>
+                <p>This project is <strong>NOT affiliated with Ethereum</strong>.</p>
+                <h2><a id="Installing_9"></a>Installing</h2>
+                <p>Globally (for command line usage):</p>
+                <pre><code>npm i node-ethereum-wallet -g
+                </code></pre>
+                <p>As a local module (for JS library usage):</p>
+                <pre><code>npm i node-ethereum-wallet
+                </code></pre>
+                <h2><a id="Commandline_Help_24"></a>Command-line Help</h2>
+                <p>The <code>ethereum-cli</code> command will be available on your shell. The following arguments are available:</p>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Arguments</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>–getaddress 🔑</td>
+                            <td></td>
+                            <td>Show your wallet’s main address</td>
+                        </tr>
+                        <tr>
+                            <td>–getnewaddress 🔑</td>
+                            <td></td>
+                            <td>Generates a new address and shows it</td>
+                        </tr>
+                        <tr>
+                            <td>–listaddresses 🔑</td>
+                            <td></td>
+                            <td>Lists all your generated addresses</td>
+                        </tr>
+                        <tr>
+                            <td>–privatekeytoaddress</td>
+                            <td><em>privateKey</em></td>
+                            <td>Converts a private key to address</td>
+                        </tr>
+                        <tr>
+                            <td>–dumpprivkey 🔑</td>
+                            <td><em>wallet</em></td>
+                            <td>Shows the private key of one of your wallet addresses</td>
+                        </tr>
+                        <tr>
+                            <td>–dumpwallet 🔑</td>
+                            <td></td>
+                            <td>Lists every private key of your wallet addresses</td>
+                        </tr>
+                        <tr>
+                            <td>–dumpseed 🔑</td>
+                            <td></td>
+                            <td>Shows your seed (mnemonic phrase)</td>
+                        </tr>
+                        <tr>
+                            <td>–getreceivedbyaddress</td>
+                            <td><em>address</em> [–minconf <em>minimumConfirmations = 0</em>]</td>
+                            <td>Get an address’ balance</td>
+                        </tr>
+                        <tr>
+                            <td>–getbalance 🔑</td>
+                            <td></td>
+                            <td>Get your account’s balance (all wallets summed up)</td>
+                        </tr>
+                        <tr>
+                            <td>–getgasprice</td>
+                            <td></td>
+                            <td>Get current gas price</td>
+                        </tr>
+                        <tr>
+                            <td>–getblockcount</td>
+                            <td></td>
+                            <td>Get current block’s number</td>
+                        </tr>
+                        <tr>
+                            <td>–getblock</td>
+                            <td><em>blockNumberOrHash</em></td>
+                            <td>Get a block’s data</td>
+                        </tr>
+                        <tr>
+                            <td>–gettransaction</td>
+                            <td><em>txid</em></td>
+                            <td>Get a transaction’s data</td>
+                        </tr>
+                        <tr>
+                            <td>–backupwallet 🔑</td>
+                            <td><em>file</em></td>
+                            <td>Backups your wallet onto file</td>
+                        </tr>
+                        <tr>
+                            <td>–createrawtransaction 🔑</td>
+                            <td><em>to</em> --from <em>from</em> --amount <em>amount</em> [–gasprice <em>gasprice</em>] [–gaslimit <em>gaslimit</em>]</td>
+                            <td>Returns an hex-encoded raw transaction</td>
+                        </tr>
+                        <tr>
+                            <td>–signrawtransaction 🔑</td>
+                            <td><em>hexRawTransaction</em> --from <em>from</em></td>
+                            <td>Returns the hex-encoded raw transaction, signed by from</td>
+                        </tr>
+                        <tr>
+                            <td>–sendrawtransaction</td>
+                            <td><em>hexRawSignedTransaction</em></td>
+                            <td>Pushes a raw transaction to the network</td>
+                        </tr>
+                        <tr>
+                            <td>–sendtoaddress 🔑</td>
+                            <td><em>to</em> --from <em>from</em> --amount <em>amount</em> [–gasprice <em>gasprice</em>] [–gaslimit <em>gaslimit</em>]</td>
+                            <td>Sends a transaction and returns its transaction ID</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3><a id="Global_options_50"></a>Global options</h3>
+                <ul>
+                    <li><code>--password &lt;password&gt;</code> Unlocks your wallet with your password. <strong>Required for every command marked<br>
+                with 🔑</strong></li>
+                    <li><code>--provider &lt;provider&gt;</code> (Optional) Use “ropsten” for <a href="http://MyEtherApi.com">MyEtherApi.com</a>'s Ropsten testnet, or a HTTP web3
+                        <br> provider URL. Default is <a href="http://MyEtherAPI.com">MyEtherAPI.com</a> mainnet provider.</li>
+                    <li><code>--datadir &lt;folder&gt;</code> (Optional) Set folder used as wallet storage. Default is ~/.ethereum-cli.</li>
+                </ul>
+                <h3><a id="Firstrun_options_58"></a>First-run options</h3>
+                <ul>
+                    <li><code>--seed &lt;seed&gt;</code> (Optional) Set a custom seed (useful for importing/restoring wallets). If not
+                        <br> supplied, one will be generated.</li>
+                    <li><code>--password &lt;password&gt;</code> (Optional) Pre-set a password. If not supplied, it will be requested.</li>
+                </ul>
+                <h3><a id="Example_sending_a_transaction_64"></a>Example: sending a transaction</h3>
+                <pre><code class="language-bash">$ ethereum-cli --getaddress
+                <span class="hljs-number">0</span>xsample
+
+                $ ethereum-cli --getbalance
+                <span class="hljs-number">5000</span>
+
+                $ ethereum-cli --sendtoaddress <span class="hljs-number">0</span>xtarget --from <span class="hljs-number">0</span>xsample --amount <span class="hljs-number">3000</span>
+                <span class="hljs-number">0</span>xtransactionID
+                </code></pre>
+                <h2><a id="Library_Help_77"></a>Library Help</h2>
+                <p>This project also exposes a Javascript class, which you can use in your NodeJS or browser projects. It can be included on NodeJS using require:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">const</span> EthereumWallet = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-ethereum-wallet'</span>)
+                </code></pre>
+                <p>On browsers, you can include it using <code>&lt;script&gt;</code>, and the global class <code>EthereumWallet</code> will be available.</p>
+                <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"./node_modules/node-ethereum-wallet/lib/index.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+                </code></pre>
+                <h3><a id="Initializing_91"></a>Initializing</h3>
+                <p>You must instantiate the class and initialize it.</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> myWallet = <span class="hljs-keyword">new</span> EthereumWallet() <span class="hljs-comment">// using MyEtherAPI.com web3 HTTP provider</span>
+                </code></pre>
+                <p>The class constructor may receive an optional argument, setting a web3 server to connect to. By default, <a href="http://MyEtherAPI.com">MyEtherAPI.com</a> provider is used, however it has great limitations as it is intended for testing purposes only. <strong>It is highly recommended to set your own web3 provider.</strong> You may want to set up a <a href="https://github.com/MyEtherWallet/docker-geth-lb">web3 provider on AWS using Docker</a> (note that it will cost you real money), or signup and use <a href="https://infura.io">Infura</a> services.</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> myWallet = <span class="hljs-keyword">new</span> EthereumWallet(<span class="hljs-string">'https://mainnet.infura.io/&lt;your infura key&gt;'</span>) <span class="hljs-comment">// using Infura provider</span>
+
+                <span class="hljs-keyword">let</span> myWallet = <span class="hljs-keyword">new</span> EthereumWallet(<span class="hljs-string">'https://localhost:8456'</span>) <span class="hljs-comment">// using your local provider</span>
+                </code></pre>
+                <p>You can modify the provider at any time using <code>myWallet.setProvider(&lt;provider&gt;)</code>.</p>
+                <p>In order to initialize the wallet, call:</p>
+                <pre><code class="language-javascript">myWallet.init()
+                </code></pre>
+                <p>It may receive an optional argument which is a folder where to keep the wallet data. By default, it is “~/.ethereum-cli”. You can change it so:</p>
+                <pre><code class="language-javascript">myWallet.init(<span class="hljs-string">"/path/to/data/dir"</span>)
+                </code></pre>
+                <p>In order to check if your provider is still syncing, just check the boolean getter <code>myWallet.isSyncing</code>.</p>
+                <h3><a id="Creating_wallet_123"></a>Creating wallet</h3>
+                <p>If your wallet hasn’t been created yet, it’s needed to create it.</p>
+                <p>It’s easy to check if your wallet has been created. Just check for the existence of a keystore.</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> myWallet.hasKeystore) {
+                    <span class="hljs-comment">// wallet exists</span>
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-comment">// wallet does not exist</span>
+                }
+                </code></pre>
+                <p>In order to create a wallet, you need a seed. Generate one so:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> seed = myWallet.generateSeed()
+                </code></pre>
+                <p>Save the seed safely, then create the keystore:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> password = <span class="hljs-string">'your-wallet-password'</span> <span class="hljs-comment">// choose one</span>
+                <span class="hljs-keyword">await</span> myWallet.createKeystore(password, seed)
+                </code></pre>
+                <h3><a id="Unlocking_your_wallet_150"></a>Unlocking your wallet</h3>
+                <p>If you are going to perform any action that requires password (i.e. sending funds, signing transactions, generating wallets), unlock your wallet so:</p>
+                <pre><code class="language-javascript">myWallet.unlock(<span class="hljs-string">'your-wallet-password'</span>)
+                </code></pre>
+                <p>In order to check if your wallet is unlocked, just check if <code>myWallet.isUnlocked</code> is true.</p>
+                <h3><a id="Generating_addresses_160"></a>Generating addresses</h3>
+                <p>It is needed to generate an address. To do so, just call:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> address = myWallet.getNewAddress()
+                </code></pre>
+                <p>It will return the new address as a string.</p>
+                <p>In order to generate multiple addresses, specify the amount of addresses to generate:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> addresses = myWallet.getNewAddress(<span class="hljs-number">5</span>)
+                </code></pre>
+                <p>It will return an array with the addresses.</p>
+                <p>If needed, you can get an address’ private key with:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> privKey = myWallet.dumpPrivKey(<span class="hljs-string">'address'</span>)
+                </code></pre>
+                <p>Or even convert a private key back to address:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> walletAddress = myWallet.privKeyToAddress(privKey)
+                </code></pre>
+                <p>An array of ever generated addresses is always available at:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> myAddresses = myWallet.addresses
+                </code></pre>
+                <h3><a id="Getting_your_balance_196"></a>Getting your balance</h3>
+                <p>Your balance summed up (from all your wallets) can be obtained, in weis, through:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> balance = <span class="hljs-keyword">await</span> myWallet.balance
+                </code></pre>
+                <p>Whereas the balance of an specified address is found with:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> balance = <span class="hljs-keyword">await</span> myWallet.getBalance(<span class="hljs-string">'address'</span>)
+                </code></pre>
+                <p>It can receive an optional argument, with the number of confirmations needed for a balance to be summed up (default is 1).</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> balanceWith3Confs = <span class="hljs-keyword">await</span> myWallet.getBalance(<span class="hljs-string">'address'</span>, <span class="hljs-number">3</span>)
+                </code></pre>
+                <h3><a id="Blocks_and_Transactions_216"></a>Blocks and Transactions</h3>
+                <p>You can get the current block number with:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> blockCount = <span class="hljs-keyword">await</span> myWallet.blockNumber
+                </code></pre>
+                <p>Information about a block is got with:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> blockInfo = <span class="hljs-keyword">await</span> myWallet.getBlock(block_id_or_hash)
+                </code></pre>
+                <p>Information about a specified transaction is available by:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> txInfo = <span class="hljs-keyword">await</span> myWallet.getTransaction(<span class="hljs-string">'txid'</span>)
+                </code></pre>
+                <h3><a id="Gas_236"></a>Gas</h3>
+                <p>You can get the current gas price (median of the latest blocks).</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> gasPrice = <span class="hljs-keyword">await</span> myWallet.gasPrice
+                </code></pre>
+                <p>And estimate the gas needed for a transaction:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> gasLimit = <span class="hljs-keyword">await</span> myWallet.estimateGas({
+                    value: <span class="hljs-string">'tx amount'</span>,
+                    to: <span class="hljs-string">'target wallet'</span>,
+                    gasPrice: <span class="hljs-keyword">await</span> myWallet.gasPrice,
+                    nonce: myWallet.getNonce(fromWallet),
+                    data: <span class="hljs-string">'optional'</span>
+                })
+                </code></pre>
+                <h3><a id="Transaction_256"></a>Transaction</h3>
+                <p>Sending Ether is as easy as:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> from_wallet = <span class="hljs-string">'from_wallet'</span> <span class="hljs-comment">// your origin wallet or myWallet.addresses[0]</span>
+                <span class="hljs-keyword">let</span> to_wallet = <span class="hljs-string">'destination'</span>
+                <span class="hljs-keyword">let</span> amount = <span class="hljs-number">1</span>*<span class="hljs-number">10e18</span> <span class="hljs-comment">// in Wei (1*10^18 Wei = 1 Ether)</span>
+
+                <span class="hljs-keyword">try</span> {
+                    <span class="hljs-keyword">let</span> txid = <span class="hljs-keyword">await</span> myWallet.sendToAddress(from_wallet, to_wallet, amount)
+                } <span class="hljs-keyword">catch</span>(e) {
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Could not send Ether. Reason: "</span>+e.message)
+                }
+                </code></pre>
+                <p>The <code>.sendToAddress</code> method can also receive two additional arguments, <code>gasPrice</code> and <code>gasLimit</code> respectively, which, by default, are automaticaly calculated. If you want to skip <code>gasPrice</code> but set <code>gasLimit</code>, then set <code>gasPrice</code> as <code>undefined</code>.</p>
+                <h4><a id="Raw_Transactions_274"></a>Raw Transactions</h4>
+                <p>You can create a hex-encoded raw transaction, instead of sending it directly. The usage of this method is the very same as <code>.sendToAddress()</code> and it returns your hex-encoded transaction as string.</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> hexTx = <span class="hljs-keyword">await</span> myWallet.createRawTx(from_wallet, to_wallet, amount)
+                </code></pre>
+                <p>Before sending your raw transaction, it is needed to sign it:</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> signedHexTx = myWallet.signTx(hexTx, from)
+                </code></pre>
+                <p>Finally, push it:</p>
+                <pre><code class="language-javascript">try {
+                    let txid = await myWallet.sendRawTx(signedHexTx)
+                } catch(e) {
+                    console.log("Could not push tx. Reason: "+e.message)
+                }
+
+                ### Backup &amp; Restore
+
+                You can get back your seed with:
+
+                ```javascript
+                let seed = myWallet.seed
+                </code></pre>
+                <p>It is not possible to recover your password (therefore, do not lose it). You can only get your seed after unlocking (<code>myWallet.unlock(password)</code>) your wallet with your password.</p>
+                <p>In order to restore your wallet, set the seed with <code>createKeystore</code>. You can specify a new password if you want.</p>
+                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> password = <span class="hljs-string">'your-wallet-password'</span> <span class="hljs-comment">// choose one or use the previous one</span>
+                <span class="hljs-keyword">await</span> myWallet.createKeystore(password, <span class="hljs-string">'your seed'</span>)
+                </code></pre>
+                <h2><a id="Todo_314"></a>Todo</h2>
+                <ul>
+                    <li>Smart contracts support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- to allow devs to test it through the JS console -->
+    <script src="https://unpkg.com/node-ethereum-wallet/lib/index.js"></script>
+</body>
+
+</html>
