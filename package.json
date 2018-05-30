@@ -1,0 +1,51 @@
+{
+  "name": "ethereum-cli",
+  "version": "1.0.0",
+  "description": "Command-line light wallet for Ethereum",
+  "main": "lib/index.js",
+  "bin": {
+    "ethereum-cli": "bin/index.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "command-line-usage": "^5.0.5",
+    "eth-lightwallet": "^3.0.1",
+    "ethjs-provider-signer": "^0.1.4",
+    "node-cmdline-parser": "^1.0.2",
+    "node-persist": "^3.0.1",
+    "password-prompt": "^1.0.6",
+    "update-check": "^1.5.2",
+    "web3": "^1.0.0-beta.34"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "./bin/index.js",
+    "postinstall": "chmod +x ./bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesobreira/ethereum-cli.git"
+  },
+  "keywords": [
+    "crypto",
+    "currency",
+    "bitcoin",
+    "ethereum",
+    "mist",
+    "electron",
+    "wallet",
+    "blockchain",
+    "dapp",
+    "smart",
+    "contract"
+  ],
+  "author": "Jefrey S. Santos <jefrey.santos@capitual.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jesobreira/ethereum-cli/issues"
+  },
+  "homepage": "https://github.com/jesobreira/ethereum-cli#readme"
+}
