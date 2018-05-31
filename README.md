@@ -1,5 +1,5 @@
-ethereum-cli
-============
+node-ethereum-wallet (ethereum-cli)
+===================================
 
 An Ethereum wallet for Node, browsers and command-line.
 
@@ -110,13 +110,13 @@ You can modify the provider at any time using `myWallet.setProvider(<provider>)`
 In order to initialize the wallet, call:
 
 ```javascript
-myWallet.init()
+await myWallet.init()
 ```
 
 It may receive an optional argument which is a folder where to keep the wallet data. By default, it is "~/.ethereum-cli". You can change it so:
 
 ```javascript
-myWallet.init("/path/to/data/dir")
+await myWallet.init("/path/to/data/dir")
 ```
 
 In order to check if your provider is still syncing, just check the boolean getter `myWallet.isSyncing`.
@@ -153,7 +153,7 @@ await myWallet.createKeystore(password, seed)
 If you are going to perform any action that requires password (i.e. sending funds, signing transactions, generating wallets), unlock your wallet so:
 
 ```javascript
-myWallet.unlock('your-wallet-password')
+await myWallet.unlock('your-wallet-password')
 ```
 
 In order to check if your wallet is unlocked, just check if `myWallet.isUnlocked` is true.
@@ -163,7 +163,7 @@ In order to check if your wallet is unlocked, just check if `myWallet.isUnlocked
 It is needed to generate an address. To do so, just call:
 
 ```javascript
-let address = myWallet.getNewAddress()
+let address = await myWallet.getNewAddress()
 ```
 
 It will return the new address as a string.
@@ -171,7 +171,7 @@ It will return the new address as a string.
 In order to generate multiple addresses, specify the amount of addresses to generate:
 
 ```javascript
-let addresses = myWallet.getNewAddress(5)
+let addresses = await myWallet.getNewAddress(5)
 ```
 
 It will return an array with the addresses.
@@ -294,6 +294,7 @@ try {
 } catch(e) {
 	console.log("Could not push tx. Reason: "+e.message)
 }
+```
 
 ### Backup & Restore
 
