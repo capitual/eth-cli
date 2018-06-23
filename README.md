@@ -316,4 +316,4 @@ await myWallet.createKeystore(password, 'your seed')
 Todo
 ----
 
-* Smart contracts support
+* Smart contracts support, ERC20 tokens support (soon)
