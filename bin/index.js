@@ -26,8 +26,8 @@ async function init() {
 
 	try {
 
-		let wallet = new mainLib(cmdline.get('provider', false))
-		await wallet.init(cmdline.get('datadir', false))
+		let wallet = new mainLib(cmdline.get('provider', (cmdline.keyexists('testnet') ? 'testnet' : false) ))
+		await wallet.init(cmdline.get('datadir', (cmdline.keyexists('testnet') ? 'testnet' : false) ))
 
 		await wallet_startup(wallet)
 
@@ -347,6 +347,10 @@ async function show_help() {
 				name: 'provider',
 				typeLabel: '{underline provider}',
 				description: '(Optional) Use "ropsten" for MyEtherApi.com\'s Ropsten testnet, or a HTTP web3 provider URL. Default is MyEtherAPI.com mainnet provider.'
+			},
+			{
+				name: 'testnet',
+				description: 'Alias for --provider testnet'
 			},
 			{
 				name: 'datadir',

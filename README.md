@@ -54,8 +54,9 @@ Command                   | Arguments                                           
                         with 🔑**
  * `--provider <provider>`   (Optional) Use "ropsten" for MyEtherApi.com's Ropsten testnet, or a HTTP web3
                         provider URL. Default is MyEtherAPI.com mainnet provider.
+ * `--testnet`               Alias for `--provider testnet`
  * `--datadir <folder>`      (Optional) Set folder used as wallet storage. Default is ~/.ethereum-cli.
-
+ 	
 ### First-run options
 
  * `--seed <seed>`           (Optional) Set a custom seed (useful for importing/restoring wallets). If not
