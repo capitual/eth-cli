@@ -135,7 +135,7 @@ async function init() {
 
 			// if amount contains dot, we assume it is in ether
 			if (amount.includes("."))
-				amount = parseFloat(amount)*1e18
+				amount = parseInt(parseFloat(amount)*1e18)
 
 			if (!to || amount === false)
 				throw new Error("Required parameters: to and amount")
