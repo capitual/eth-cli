@@ -324,7 +324,7 @@ async function show_help() {
 			},
 			{
 				name: 'createrawtransaction 🔑 ',
-				typeLabel: '{underline to} --from {underline from} --amount {underline amount} [--gasprice {underline gasprice}] [--gaslimit {underline gaslimit}]',
+				typeLabel: '{underline to} --amount {underline amount} [--from {underline from}] [--gasprice {underline gasprice}] [--gaslimit {underline gaslimit}]',
 				description: 'Returns an hex-encoded raw transaction'
 			},
 			{
@@ -339,7 +339,7 @@ async function show_help() {
 			},
 			{
 				name: 'sendtoaddress 🔑 ',
-				typeLabel: '{underline to} --from {underline from} --amount {underline amount} [--gasprice {underline gasprice}] [--gaslimit {underline gaslimit}]',
+				typeLabel: '{underline to} --amount {underline amount} [--from {underline from}] [--gasprice {underline gasprice}] [--gaslimit {underline gaslimit}]',
 				description: 'Sends a transaction and returns its transaction ID'
 			}
 		] 
