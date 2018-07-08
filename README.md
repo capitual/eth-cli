@@ -42,11 +42,12 @@ Command                   | Arguments                                           
 --getblockcount           |                                                                                      | Get current block's number
 --getblock                | _blockNumberOrHash_                                                                  | Get a block's data
 --gettransaction          | _txid_                                                                               | Get a transaction's data
+--decoderawtransaction    | _hex_                                                                                | Decodes a raw transaction
 --backupwallet 🔑         | _file_                                                                               | Backups your wallet onto file
---createrawtransaction 🔑 | _to_ --from _from_ --amount _amount_ [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Returns an hex-encoded raw transaction
+--createrawtransaction 🔑 | _to_ --amount _amount_ [--from _from_] [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Returns an hex-encoded raw transaction
 --signrawtransaction 🔑   | _hexRawTransaction_ --from _from_                                                    | Returns the hex-encoded raw transaction, signed by from
 --sendrawtransaction      | _hexRawSignedTransaction_                                                            | Pushes a raw transaction to the network
---sendtoaddress 🔑        | _to_ --from _from_ --amount _amount_ [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Sends a transaction and returns its transaction ID
+--sendtoaddress 🔑        | _to_ --amount _amount_ [--from _from_] [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Sends a transaction and returns its transaction ID
 
 ### Global options
 
