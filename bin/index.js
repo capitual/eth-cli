@@ -290,7 +290,8 @@ async function show_help() {
 				description: 'Get an address\' balance'
 			},
 			{
-				name: 'getbalance 🔑 ',
+				name: 'getbalance',
+				typeLabel: '[--minconf {underline minimumConfirmations = 0}]',
 				description: 'Get your account\'s balance (all wallets summed up)'
 			},
 			{
