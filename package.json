@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jesobreira/ethereum-cli.git"
+    "url": "git+https://github.com/jesobreira/eth-cli.git"
   },
   "keywords": [
     "crypto",
@@ -46,7 +46,7 @@
   "author": "Jefrey S. Santos <jefrey.santos@capitual.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jesobreira/ethereum-cli/issues"
+    "url": "https://github.com/jesobreira/eth-cli/issues"
   },
-  "homepage": "https://github.com/jesobreira/ethereum-cli#readme"
+  "homepage": "https://github.com/jesobreira/eth-cli#readme"
 }
