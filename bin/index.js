@@ -105,6 +105,10 @@ async function init() {
 			output(await wallet.getTransaction(cmdline.get('gettransaction', cmdline.get('gettx'))))
 		}
 
+		else if (cmdline.get('decoderawtx') || cmdline.get('decoderawtransaction')) {
+			output(await wallet.decodeRawTx(cmdline.get('decoderawtx', cmdline.get('decoderawtransaction'))))
+		}
+
 		else if (cmdline.get('sendtoaddress')) {
 			let amount = cmdline.get('amount', false)
 			let from = cmdline.get('from', wallet.addresses[0])
@@ -306,6 +310,11 @@ async function show_help() {
 				name: 'gettransaction',
 				typeLabel: '{underline txid}',
 				description: 'Get a transaction\'s data'
+			},
+			{
+				name: 'decoderawtx',
+				typeLabel: '{underline hex}',
+				description: 'Decodes a raw transaction'
 			},
 			{
 				name: 'backupwallet 🔑 ',

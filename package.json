@@ -13,6 +13,7 @@
     "async": "^2.6.1",
     "command-line-usage": "^5.0.5",
     "eth-lightwallet": "^3.0.1",
+    "ethereum-tx-decoder": "^2.0.1",
     "ethjs-provider-signer": "^0.1.4",
     "node-cmdline-parser": "^1.0.2",
     "node-persist": "^3.0.1",
