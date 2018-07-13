@@ -52,12 +52,12 @@ Command                   | Arguments                                           
 
 ### ERC-20 commands
 
-Command          | Arguments                                                                                 | Description
------------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------
---erc20          | _contractAddr_ [--abi _abiOrFile_]                                                        | Specify an ERC-20 contract to use (see below)
---gettokendata   | --erc20 _contractAddr_ [--abi _abiOrFile_]                                                | Get token data (name, symbol etc.) from contract, if available
---getbalance     | _address_ --erc20 _contractAddr_ [--abi _abiOrFile_]                                      | Get any wallet's balance. If address is not specified, it will return the sum of the balance of all your generated wallets
---sendtoaddress  | _address_ --erc20 _contractAddr_ [--abi _abiOrFile_] --amount _amount_ [--from _fromaddr] | Sends an amount of ERC-20 token to an address
+Command            | Arguments                                                                                 | Description
+-------------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------
+--erc20            | _contractAddr_ [--abi _abiOrFile_]                                                        | Specify an ERC-20 contract to use (see below)
+--gettokendata     | --erc20 _contractAddr_ [--abi _abiOrFile_]                                                | Get token data (name, symbol etc.) from contract, if available
+--getbalance       | _address_ --erc20 _contractAddr_ [--abi _abiOrFile_]                                      | Get any wallet's balance. If address is not specified, it will return the sum of the balance of all your generated wallets
+--sendtoaddress 🔑 | _address_ --erc20 _contractAddr_ [--abi _abiOrFile_] --amount _amount_ [--from _fromaddr] | Sends an amount of ERC-20 token to an address
 
 
 ### Global options
