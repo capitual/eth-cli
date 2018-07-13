@@ -1,310 +1,290 @@
 <!doctype html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ethereum wallet for command line, NodeJS and the browser">
-    <title>Node Ethereum Wallet (ethereum-cli)</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
+<meta charset="utf-8">
+<title>Ethereum and ERC-20 wallet for command line and Node</title>
+<meta name="description" content="Command-line and NodeJS wallet for Ethereum and ERC-20 tokens">
+<style>
+div#container
+{
+   width: 906px;
+   position: relative;
+   margin: 0 auto 0 auto;
+   text-align: left;
+}
+body
+{
+   background-color: #FFFFFF;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   text-align: center;
+}
+</style>
+<link href="smoothness/jquery-ui.min.css" rel="stylesheet">
+<style>
+a
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+a:visited
+{
+   color: #800080;
+}
+a:active
+{
+   color: #FF0000;
+}
+a:hover
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+#PageHeader1
+{
+   background-color: #66CDAA;
+   background-image: none;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+}
+#terminal
+{
+   border: 0px #000000 solid;
+   padding: 0px 0px 0px 0px;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+.ui-widget
+{
+   font-size: 1em !important;
+}
+#tabs
+{
+   padding: 4px 4px 4px 4px;
+}
+#tabs .ui-tabs-nav
+{
+   font-family: Arial;
+   font-weight: normal;
+   padding: 4px 4px 0px 4px;
+   font-size: 0;
+   text-align: center;
+}
+#tabs .ui-tabs-nav li
+{
+   display: inline-block;
+   float: none;
+   font-family: Arial;
+   font-weight: normal;
+   font-style: normal;
+   margin: 0px 2px -1px 0px;
+}
+#tabs .ui-tabs-nav li a
+{
+   padding: 8px 10px 8px 10px;
+   font-size: 13px;
+}
+#tabs, #tabs .ui-corner-all, #tabs .ui-corner-top
+{
+   -webkit-border-top-left-radius: 0px;
+   -moz-border-top-left-radius: 0px;
+   border-top-left-radius: 0px;
+   -webkit-border-top-right-radius: 0px;
+   -moz-border-top-right-radius: 0px;
+   border-top-right-radius: 0px;
+}
+#tabs, #tabs .ui-corner-all, #tabs .ui-corner-bottom
+{
+   -webkit-border-bottom-right-radius: 0px;
+   -moz-border-bottom-right-radius: 0px;
+   border-bottom-right-radius: 0px;
+   -webkit-border-bottom-left-radius: 0px;
+   -moz-border-bottom-left-radius: 0px;
+   border-bottom-left-radius: 0px;
+}
+#tabs .ui-tabs-panel
+{
+   position: relative;
+   left: 0;
+   top: 0;
+   padding: 0;
+}
+#wb_installTxt
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_installTxt div
+{
+   text-align: left;
+}
+#wb_libTxt
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_libTxt div
+{
+   text-align: left;
+}
+#wb_subtitle
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_subtitle div
+{
+   text-align: center;
+}
+#wb_title
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_title div
+{
+   text-align: center;
+}
+#wb_guiTxt
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_guiTxt div
+{
+   text-align: center;
+}
+#wb_forkTxt
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_forkTxt div
+{
+   text-align: center;
+}
+#wb_docsTxt
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_docsTxt div
+{
+   text-align: center;
+}
+</style>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script>
+$(document).ready(function()
+{
+   var tabsOptions =
+   {
+      show: false,
+      event: 'click',
+      collapsible: false
+   };
+   $("#tabs").tabs(tabsOptions);
+});
+</script>
 </head>
-
 <body>
-
-    
-
-    <div id="layout">
-        <a href="https://github.com/jesobreira/eth-cli" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-        <div id="main">
-            <div class="header">
-                <h1>Node Ethereum Wallet</h1>
-                <h2>ethereum-cli</h2>
-            </div>
-            <div class="content">
-                <h1><a id="ethereumcli_0"></a>ethereum-cli</h1>
-                <p>An Ethereum wallet for Node, browsers and command-line.</p>
-                <p>Powered by <a href="https://github.com/ethereum/web3.js">web3.js</a> and <a href="https://github.com/ConsenSys/eth-lightwallet">eth-lightwallet</a>.</p>
-                <p>This project is <strong>NOT affiliated with Ethereum</strong>.</p>
-                <h2><a id="Installing_9"></a>Installing</h2>
-                <p>Globally (for command line usage):</p>
-                <pre><code>npm i node-ethereum-wallet -g
-                </code></pre>
-                <p>As a local module (for JS library usage):</p>
-                <pre><code>npm i node-ethereum-wallet
-                </code></pre>
-                <h2><a id="Commandline_Help_24"></a>Command-line Help</h2>
-                <p>The <code>ethereum-cli</code> command will be available on your shell. The following arguments are available:</p>
-                <table class="pure-table pure-table-striped">
-                    <thead>
-                        <tr>
-                            <th>Command</th>
-                            <th>Arguments</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>–getaddress 🔑</td>
-                            <td></td>
-                            <td>Show your wallet’s main address</td>
-                        </tr>
-                        <tr>
-                            <td>–getnewaddress 🔑</td>
-                            <td></td>
-                            <td>Generates a new address and shows it</td>
-                        </tr>
-                        <tr>
-                            <td>–listaddresses 🔑</td>
-                            <td></td>
-                            <td>Lists all your generated addresses</td>
-                        </tr>
-                        <tr>
-                            <td>–privatekeytoaddress</td>
-                            <td><em>privateKey</em></td>
-                            <td>Converts a private key to address</td>
-                        </tr>
-                        <tr>
-                            <td>–dumpprivkey 🔑</td>
-                            <td><em>wallet</em></td>
-                            <td>Shows the private key of one of your wallet addresses</td>
-                        </tr>
-                        <tr>
-                            <td>–dumpwallet 🔑</td>
-                            <td></td>
-                            <td>Lists every private key of your wallet addresses</td>
-                        </tr>
-                        <tr>
-                            <td>–dumpseed 🔑</td>
-                            <td></td>
-                            <td>Shows your seed (mnemonic phrase)</td>
-                        </tr>
-                        <tr>
-                            <td>–getreceivedbyaddress</td>
-                            <td><em>address</em> [–minconf <em>minimumConfirmations = 0</em>]</td>
-                            <td>Get an address’ balance</td>
-                        </tr>
-                        <tr>
-                            <td>–getbalance 🔑</td>
-                            <td></td>
-                            <td>Get your account’s balance (all wallets summed up)</td>
-                        </tr>
-                        <tr>
-                            <td>–getgasprice</td>
-                            <td></td>
-                            <td>Get current gas price</td>
-                        </tr>
-                        <tr>
-                            <td>–getblockcount</td>
-                            <td></td>
-                            <td>Get current block’s number</td>
-                        </tr>
-                        <tr>
-                            <td>–getblock</td>
-                            <td><em>blockNumberOrHash</em></td>
-                            <td>Get a block’s data</td>
-                        </tr>
-                        <tr>
-                            <td>–gettransaction</td>
-                            <td><em>txid</em></td>
-                            <td>Get a transaction’s data</td>
-                        </tr>
-                        <tr>
-                            <td>–backupwallet 🔑</td>
-                            <td><em>file</em></td>
-                            <td>Backups your wallet onto file</td>
-                        </tr>
-                        <tr>
-                            <td>–createrawtransaction 🔑</td>
-                            <td><em>to</em> --from <em>from</em> --amount <em>amount</em> [–gasprice <em>gasprice</em>] [–gaslimit <em>gaslimit</em>]</td>
-                            <td>Returns an hex-encoded raw transaction</td>
-                        </tr>
-                        <tr>
-                            <td>–signrawtransaction 🔑</td>
-                            <td><em>hexRawTransaction</em> --from <em>from</em></td>
-                            <td>Returns the hex-encoded raw transaction, signed by from</td>
-                        </tr>
-                        <tr>
-                            <td>–sendrawtransaction</td>
-                            <td><em>hexRawSignedTransaction</em></td>
-                            <td>Pushes a raw transaction to the network</td>
-                        </tr>
-                        <tr>
-                            <td>–sendtoaddress 🔑</td>
-                            <td><em>to</em> --from <em>from</em> --amount <em>amount</em> [–gasprice <em>gasprice</em>] [–gaslimit <em>gaslimit</em>]</td>
-                            <td>Sends a transaction and returns its transaction ID</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h3><a id="Global_options_50"></a>Global options</h3>
-                <ul>
-                    <li><code>--password &lt;password&gt;</code> Unlocks your wallet with your password. <strong>Required for every command marked<br>
-                with 🔑</strong></li>
-                    <li><code>--provider &lt;provider&gt;</code> (Optional) Use “ropsten” for <a href="http://MyEtherApi.com">MyEtherApi.com</a>'s Ropsten testnet, or a HTTP web3
-                        <br> provider URL. Default is <a href="http://MyEtherAPI.com">MyEtherAPI.com</a> mainnet provider.</li>
-                    <li><code>--datadir &lt;folder&gt;</code> (Optional) Set folder used as wallet storage. Default is ~/.ethereum-cli.</li>
-                </ul>
-                <h3><a id="Firstrun_options_58"></a>First-run options</h3>
-                <ul>
-                    <li><code>--seed &lt;seed&gt;</code> (Optional) Set a custom seed (useful for importing/restoring wallets). If not
-                        <br> supplied, one will be generated.</li>
-                    <li><code>--password &lt;password&gt;</code> (Optional) Pre-set a password. If not supplied, it will be requested.</li>
-                </ul>
-                <h3><a id="Example_sending_a_transaction_64"></a>Example: sending a transaction</h3>
-                <pre><code class="language-bash">$ ethereum-cli --getaddress
-                <span class="hljs-number">0</span>xsample
-
-                $ ethereum-cli --getbalance
-                <span class="hljs-number">5000</span>
-
-                $ ethereum-cli --sendtoaddress <span class="hljs-number">0</span>xtarget --from <span class="hljs-number">0</span>xsample --amount <span class="hljs-number">3000</span>
-                <span class="hljs-number">0</span>xtransactionID
-                </code></pre>
-                <h2><a id="Library_Help_77"></a>Library Help</h2>
-                <p>This project also exposes a Javascript class, which you can use in your NodeJS or browser projects. It can be included on NodeJS using require:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">const</span> EthereumWallet = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node-ethereum-wallet'</span>)
-                </code></pre>
-                <p>On browsers, you can include it using <code>&lt;script&gt;</code>, and the global class <code>EthereumWallet</code> will be available.</p>
-                <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"./node_modules/node-ethereum-wallet/lib/index.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-                </code></pre>
-                <h3><a id="Initializing_91"></a>Initializing</h3>
-                <p>You must instantiate the class and initialize it.</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> myWallet = <span class="hljs-keyword">new</span> EthereumWallet() <span class="hljs-comment">// using MyEtherAPI.com web3 HTTP provider</span>
-                </code></pre>
-                <p>The class constructor may receive an optional argument, setting a web3 server to connect to. By default, <a href="http://MyEtherAPI.com">MyEtherAPI.com</a> provider is used, however it has great limitations as it is intended for testing purposes only. <strong>It is highly recommended to set your own web3 provider.</strong> You may want to set up a <a href="https://github.com/MyEtherWallet/docker-geth-lb">web3 provider on AWS using Docker</a> (note that it will cost you real money), or signup and use <a href="https://infura.io">Infura</a> services.</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> myWallet = <span class="hljs-keyword">new</span> EthereumWallet(<span class="hljs-string">'https://mainnet.infura.io/&lt;your infura key&gt;'</span>) <span class="hljs-comment">// using Infura provider</span>
-
-                <span class="hljs-keyword">let</span> myWallet = <span class="hljs-keyword">new</span> EthereumWallet(<span class="hljs-string">'https://localhost:8456'</span>) <span class="hljs-comment">// using your local provider</span>
-                </code></pre>
-                <p>You can modify the provider at any time using <code>myWallet.setProvider(&lt;provider&gt;)</code>.</p>
-                <p>In order to initialize the wallet, call:</p>
-                <pre><code class="language-javascript">myWallet.init()
-                </code></pre>
-                <p>It may receive an optional argument which is a folder where to keep the wallet data. By default, it is “~/.ethereum-cli”. You can change it so:</p>
-                <pre><code class="language-javascript">myWallet.init(<span class="hljs-string">"/path/to/data/dir"</span>)
-                </code></pre>
-                <p>In order to check if your provider is still syncing, just check the boolean getter <code>myWallet.isSyncing</code>.</p>
-                <h3><a id="Creating_wallet_123"></a>Creating wallet</h3>
-                <p>If your wallet hasn’t been created yet, it’s needed to create it.</p>
-                <p>It’s easy to check if your wallet has been created. Just check for the existence of a keystore.</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> myWallet.hasKeystore) {
-                    <span class="hljs-comment">// wallet exists</span>
-                } <span class="hljs-keyword">else</span> {
-                    <span class="hljs-comment">// wallet does not exist</span>
-                }
-                </code></pre>
-                <p>In order to create a wallet, you need a seed. Generate one so:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> seed = myWallet.generateSeed()
-                </code></pre>
-                <p>Save the seed safely, then create the keystore:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> password = <span class="hljs-string">'your-wallet-password'</span> <span class="hljs-comment">// choose one</span>
-                <span class="hljs-keyword">await</span> myWallet.createKeystore(password, seed)
-                </code></pre>
-                <h3><a id="Unlocking_your_wallet_150"></a>Unlocking your wallet</h3>
-                <p>If you are going to perform any action that requires password (i.e. sending funds, signing transactions, generating wallets), unlock your wallet so:</p>
-                <pre><code class="language-javascript">myWallet.unlock(<span class="hljs-string">'your-wallet-password'</span>)
-                </code></pre>
-                <p>In order to check if your wallet is unlocked, just check if <code>myWallet.isUnlocked</code> is true.</p>
-                <h3><a id="Generating_addresses_160"></a>Generating addresses</h3>
-                <p>It is needed to generate an address. To do so, just call:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> address = myWallet.getNewAddress()
-                </code></pre>
-                <p>It will return the new address as a string.</p>
-                <p>In order to generate multiple addresses, specify the amount of addresses to generate:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> addresses = myWallet.getNewAddress(<span class="hljs-number">5</span>)
-                </code></pre>
-                <p>It will return an array with the addresses.</p>
-                <p>If needed, you can get an address’ private key with:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> privKey = myWallet.dumpPrivKey(<span class="hljs-string">'address'</span>)
-                </code></pre>
-                <p>Or even convert a private key back to address:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> walletAddress = myWallet.privKeyToAddress(privKey)
-                </code></pre>
-                <p>An array of ever generated addresses is always available at:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> myAddresses = myWallet.addresses
-                </code></pre>
-                <h3><a id="Getting_your_balance_196"></a>Getting your balance</h3>
-                <p>Your balance summed up (from all your wallets) can be obtained, in weis, through:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> balance = <span class="hljs-keyword">await</span> myWallet.balance
-                </code></pre>
-                <p>Whereas the balance of an specified address is found with:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> balance = <span class="hljs-keyword">await</span> myWallet.getBalance(<span class="hljs-string">'address'</span>)
-                </code></pre>
-                <p>It can receive an optional argument, with the number of confirmations needed for a balance to be summed up (default is 1).</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> balanceWith3Confs = <span class="hljs-keyword">await</span> myWallet.getBalance(<span class="hljs-string">'address'</span>, <span class="hljs-number">3</span>)
-                </code></pre>
-                <h3><a id="Blocks_and_Transactions_216"></a>Blocks and Transactions</h3>
-                <p>You can get the current block number with:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> blockCount = <span class="hljs-keyword">await</span> myWallet.blockNumber
-                </code></pre>
-                <p>Information about a block is got with:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> blockInfo = <span class="hljs-keyword">await</span> myWallet.getBlock(block_id_or_hash)
-                </code></pre>
-                <p>Information about a specified transaction is available by:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> txInfo = <span class="hljs-keyword">await</span> myWallet.getTransaction(<span class="hljs-string">'txid'</span>)
-                </code></pre>
-                <h3><a id="Gas_236"></a>Gas</h3>
-                <p>You can get the current gas price (median of the latest blocks).</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> gasPrice = <span class="hljs-keyword">await</span> myWallet.gasPrice
-                </code></pre>
-                <p>And estimate the gas needed for a transaction:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> gasLimit = <span class="hljs-keyword">await</span> myWallet.estimateGas({
-                    value: <span class="hljs-string">'tx amount'</span>,
-                    to: <span class="hljs-string">'target wallet'</span>,
-                    gasPrice: <span class="hljs-keyword">await</span> myWallet.gasPrice,
-                    nonce: myWallet.getNonce(fromWallet),
-                    data: <span class="hljs-string">'optional'</span>
-                })
-                </code></pre>
-                <h3><a id="Transaction_256"></a>Transaction</h3>
-                <p>Sending Ether is as easy as:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> from_wallet = <span class="hljs-string">'from_wallet'</span> <span class="hljs-comment">// your origin wallet or myWallet.addresses[0]</span>
-                <span class="hljs-keyword">let</span> to_wallet = <span class="hljs-string">'destination'</span>
-                <span class="hljs-keyword">let</span> amount = <span class="hljs-number">1</span>*<span class="hljs-number">10e18</span> <span class="hljs-comment">// in Wei (1*10^18 Wei = 1 Ether)</span>
-
-                <span class="hljs-keyword">try</span> {
-                    <span class="hljs-keyword">let</span> txid = <span class="hljs-keyword">await</span> myWallet.sendToAddress(from_wallet, to_wallet, amount)
-                } <span class="hljs-keyword">catch</span>(e) {
-                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Could not send Ether. Reason: "</span>+e.message)
-                }
-                </code></pre>
-                <p>The <code>.sendToAddress</code> method can also receive two additional arguments, <code>gasPrice</code> and <code>gasLimit</code> respectively, which, by default, are automaticaly calculated. If you want to skip <code>gasPrice</code> but set <code>gasLimit</code>, then set <code>gasPrice</code> as <code>undefined</code>.</p>
-                <h4><a id="Raw_Transactions_274"></a>Raw Transactions</h4>
-                <p>You can create a hex-encoded raw transaction, instead of sending it directly. The usage of this method is the very same as <code>.sendToAddress()</code> and it returns your hex-encoded transaction as string.</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> hexTx = <span class="hljs-keyword">await</span> myWallet.createRawTx(from_wallet, to_wallet, amount)
-                </code></pre>
-                <p>Before sending your raw transaction, it is needed to sign it:</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> signedHexTx = myWallet.signTx(hexTx, from)
-                </code></pre>
-                <p>Finally, push it:</p>
-                <pre><code class="language-javascript">try {
-                    let txid = await myWallet.sendRawTx(signedHexTx)
-                } catch(e) {
-                    console.log("Could not push tx. Reason: "+e.message)
-                }
-
-                ### Backup &amp; Restore
-
-                You can get back your seed with:
-
-                ```javascript
-                let seed = myWallet.seed
-                </code></pre>
-                <p>It is not possible to recover your password (therefore, do not lose it). You can only get your seed after unlocking (<code>myWallet.unlock(password)</code>) your wallet with your password.</p>
-                <p>In order to restore your wallet, set the seed with <code>createKeystore</code>. You can specify a new password if you want.</p>
-                <pre><code class="language-javascript"><span class="hljs-keyword">let</span> password = <span class="hljs-string">'your-wallet-password'</span> <span class="hljs-comment">// choose one or use the previous one</span>
-                <span class="hljs-keyword">await</span> myWallet.createKeystore(password, <span class="hljs-string">'your seed'</span>)
-                </code></pre>
-                <h2><a id="Todo_314"></a>Todo</h2>
-                <ul>
-                    <li>Smart contracts support</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- to allow devs to test it through the JS console -->
-    <script src="https://unpkg.com/node-ethereum-wallet/lib/index.js"></script>
+<div id="container">
+<div id="wb_terminal" style="position:absolute;left:58px;top:144px;width:776px;height:483px;z-index:7;">
+<img src="images/terminal.png" id="terminal" alt=""></div>
+<div id="tabs" style="position:absolute;left:61px;top:640px;width:765px;height:157px;z-index:8;">
+<ul>
+<li><a href="#tabs-page-0"><span>Install</span></a></li>
+<li><a href="#tabs-page-1"><span>NodeJS Library</span></a></li>
+<li><a href="#tabs-page-2"><span>Love GUIs?</span></a></li>
+<li><a href="#tabs-page-3"><span>Contribute</span></a></li>
+<li><a href="#tabs-page-4"><span>Docs</span></a></li>
+</ul>
+<div style="height:136px;" id="tabs-page-0">
+<div id="wb_installTxt" style="position:absolute;left:294px;top:41px;width:198px;height:47px;z-index:1;">
+<div style="font-family:Arial;font-size:13px;line-height:15px;color:#000000;">
+<div><span style="font-family:'Trebuchet MS';">$ npm i -g node-ethereum-wallet</span></div>
+<div><span style="font-family:'Trebuchet MS';">$ ethereum-cli</span></div>
+</div>
+</div>
+</div>
+<div style="height:136px;" id="tabs-page-1">
+<div id="wb_libTxt" style="position:absolute;left:266px;top:35px;width:250px;height:50px;z-index:2;">
+<div style="font-family:Arial;font-size:13px;line-height:15px;color:#000000;">
+<div><span style="font-family:'Trebuchet MS';">$ npm install node-ethereum-wallet</span></div>
+<div><br></div>
+<div><span style="font-family:'Trebuchet MS';">let Eth = require('node-ethereum-wallet')</span></div>
+</div>
+</div>
+</div>
+<div style="height:136px;" id="tabs-page-2">
+<div id="wb_guiTxt" style="position:absolute;left:185px;top:43px;width:413px;height:28px;z-index:3;">
+<div style="font-family:Arial;font-size:13px;line-height:15px;color:#000000;">
+<div><span style="color:#0000FF;"><a href="https://jesobreira.github.io/elethereum">Take a look on Elethereum.</a></span></div>
+</div>
+</div>
+</div>
+<div style="height:136px;" id="tabs-page-3">
+<div id="wb_forkTxt" style="position:absolute;left:186px;top:45px;width:413px;height:28px;z-index:4;">
+<div style="font-family:Arial;font-size:13px;line-height:15px;color:#000000;">
+<div><span style="color:#0000FF;"><a href="https://github.com/jesobreira/eth-cli">Fork us on GitHub</a></span></div>
+</div>
+</div>
+</div>
+<div style="height:136px;" id="tabs-page-4">
+<div id="wb_docsTxt" style="position:absolute;left:186px;top:45px;width:413px;height:28px;z-index:5;">
+<div style="font-family:Arial;font-size:13px;line-height:15px;color:#000000;">
+<div><span style="color:#0000FF;"><a href="https://github.com/jesobreira/eth-cli/blob/master/README.md">Read the Docs</a></span></div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_title" style="position:absolute;left:136px;top:23px;width:592px;height:44px;z-index:9;">
+<div style="font-family:Arial;font-size:13px;line-height:39px;color:#000000;">
+<div><span style="font-family:Tahoma;font-size:32px;line-height:39px;color:#FFFFFF;">Ethereum/ERC-20 Wallet</span></div>
+</div>
+</div>
+</div>
+<div id="PageHeader1" style="position:absolute;text-align:left;left:0px;top:0px;width:100%;height:366px;z-index:7777;z-index: 0 !important;">
+<div id="wb_subtitle" style="position:absolute;left:157px;top:75px;width:592px;height:44px;z-index:0;">
+<div style="font-family:Arial;font-size:13px;line-height:25px;color:#000000;">
+<div><span style="font-family:Tahoma;font-size:21px;line-height:25px;color:#FFFFFF;">For command-line and NodeJS</span></div>
+</div>
+</div>
+</div>
 </body>
-
 </html>
