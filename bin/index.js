@@ -35,8 +35,56 @@ async function init() {
 			await wallet.unlock(cmdline.get('password'))
 		}
 
-		// parsing
-		if (cmdline.keyexists('help')) {
+		if (cmdline.get('erc20')) {
+			let contract = new wallet.Erc20(cmdline.get('erc20'), cmdline.get('abi', null))
+			if (cmdline.keyexists('gettokendata')) {
+				try {
+					let contractName = contract.name,
+						contractSymbol = contract.symbol,
+						contractDecimals = contract.decimals,
+						contractTotalSupply = contract.totalSupply
+					output({
+						'name': await contractName.catch(e => console.log("[E] Unable to get token name. Please specify custom ABI or check contract address.")) || console.log("Unable to get token data. Please specify custom ABI or check contract address."),
+						'symbol': await contractSymbol.catch(e => console.log("[E] Unable to get token symbol. Please specify custom ABI or check contract address.")) || console.log("Unable to get token data. Please specify custom ABI or check contract address."),
+						'decimals': await contractDecimals.catch(e => console.log("[E] Unable to get token decimals. Please specify custom ABI or check contract address.")) || console.log("Unable to get token data. Please specify custom ABI or check contract address."),
+						'totalSupply': await contractTotalSupply.catch(e => console.log("[E] Unable to get token total supply. Please specify custom ABI or check contract address.")) || console.log("Unable to get token data. Please specify custom ABI or check contract address.")
+					})
+				} catch(e) {
+					console.log("[E] Unable to get token data. Please specify custom ABI or check contract address.")
+				}
+			} else if (cmdline.keyexists('getbalance')) {
+				if (cmdline.get('getbalance') && !cmdline.get('getbalance').startsWith("--")) {
+					// balanceOf
+					output(await contract.balanceOf(cmdline.get('getbalance'), cmdline.get('minconf', 0)))
+				} else {
+					// my balance
+					output(await contract.balanceOf(wallet.addresses[0], cmdline.get('minconf', 0)))
+				}
+			} else if (cmdline.get('sendtoaddress')) {
+				let amount = cmdline.get('amount', false)
+				let from = cmdline.get('from', wallet.addresses[0])
+				let to = cmdline.get('sendtoaddress', false)
+				let gasPrice = cmdline.get('gasprice', undefined)
+				let gasLimit = cmdline.get('gaslimit', undefined)
+
+				if (!to || amount === false || !cmdline.get('password'))
+					throw new Error("Required parameters: to, amount, password")
+
+				output(await contract.transfer(to, amount, {
+					from,
+					gasPrice,
+					gasLimit
+				}))
+			} else if (cmdline.get('allowance')) {
+				console.log("Not implemented, yet.")
+			} else if (cmdline.get('approve')) {
+				console.log("Not implemented, yet.")
+			} else {
+				show_help()
+			}
+		}
+
+		else if (cmdline.keyexists('help')) {
 			return show_help()
 		}
 
@@ -340,9 +388,40 @@ async function show_help() {
 			{
 				name: 'sendtoaddress 🔑 ',
 				typeLabel: '{underline to} --amount {underline amount} [--from {underline from}] [--gasprice {underline gasprice}] [--gaslimit {underline gaslimit}]',
-				description: 'Sends a transaction and returns its transaction ID'
+				description: 'Sends a transaction and returns its transaction ID. Amount will be interpreted as wei if no comma is found, or ether if comma is found (i.e. 1.0 = 1 ether; 1 = 1 wei)'
+			},
+			{
+				name: 'erc20',
+				typeLabel: '{underline contractAddr} [--abi {underline abi_or_file}]',
+				description: 'Specify an ERC-20 contract to use (see below)'
 			}
 		] 
+	})
+
+	sections.push({
+		header: 'ERC-20 commands',
+		optionList: [
+			{
+				name: 'erc20',
+				typeLabel: '{underline contractAddr} [--abi {underline abi_or_file}]',
+				description: 'Specify an ERC-20 contract to use'
+			},
+			{
+				name: 'gettokendata',
+				typeLabel: '--erc20 {underline contract} [--abi {underline abi_or_file}]',
+				description: 'Get token data (name, symbol etc.) from contract, if available'
+			},
+			{
+				name: 'getbalance',
+				typeLabel: '[{underline address}] --erc20 {underline contract} [--abi {underline abi_or_file}]',
+				description: 'Get any wallet\'s balance. If address is not specified, it will return the sum of the balance of all your generated wallets'
+			},
+			{
+				name: 'sendtoaddress 🔑 ',
+				typeLabel: '{underline address} --erc20 {underline contract} [--abi {underline abi_or_file}] --amount {underline amount} [--from {underline fromaddr}]',
+				description: 'Sends an amount of ERC-20 token to an address'
+			}
+		]
 	})
 
 	sections.push({

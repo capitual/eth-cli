@@ -1,6 +1,6 @@
 {
   "name": "node-ethereum-wallet",
-  "version": "1.0.3",
+  "version": "1.3.2",
   "description": "Command-line light wallet for Ethereum",
   "main": "lib/index.js",
   "bin": {
@@ -12,12 +12,14 @@
   "dependencies": {
     "async": "^2.6.1",
     "command-line-usage": "^5.0.5",
+    "erc20-contract-js": "^1.1.1",
     "eth-lightwallet": "^3.0.1",
     "ethereum-tx-decoder": "^2.0.1",
     "ethjs-provider-signer": "^0.1.4",
     "node-cmdline-parser": "^1.0.2",
     "node-persist": "^3.0.1",
     "password-prompt": "^1.0.6",
+    "underscore": "^1.9.1",
     "update-check": "^1.5.2",
     "web3": "^1.0.0-beta.34"
   },

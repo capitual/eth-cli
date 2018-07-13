@@ -25,10 +25,10 @@ npm i node-ethereum-wallet
 Command-line Help
 -----------------
 
-The `ethereum-cli` command will be available on your shell. The following arguments are available:
+The `ethereum-cli` command will be available on your shell. The following arguments are available (the table below is available by running `ethereum-cli` with no arguments or `ethereum-cli --help`):
 
 Command                   | Arguments                                                                            | Description
---------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------
+--------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --getaddress 🔑           |                                                                                      | Show your wallet's main address
 --getnewaddress 🔑        |                                                                                      | Generates a new address and shows it
 --listaddresses 🔑        |                                                                                      | Lists all your generated addresses
@@ -47,7 +47,18 @@ Command                   | Arguments                                           
 --createrawtransaction 🔑 | _to_ --amount _amount_ [--from _from_] [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Returns an hex-encoded raw transaction
 --signrawtransaction 🔑   | _hexRawTransaction_ --from _from_                                                    | Returns the hex-encoded raw transaction, signed by from
 --sendrawtransaction      | _hexRawSignedTransaction_                                                            | Pushes a raw transaction to the network
---sendtoaddress 🔑        | _to_ --amount _amount_ [--from _from_] [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Sends a transaction and returns its transaction ID
+--sendtoaddress 🔑        | _to_ --amount _amount_ [--from _from_] [--gasprice _gasprice_] [--gaslimit _gaslimit_] | Sends a transaction and returns its transaction ID. Amount will be interpreted as wei if no comma is found, or ether if comma is found (i.e. 1.0 = 1 ether; 1 = 1 wei)
+--erc20					  | _contractAddr_ [--abi _abiOrFile_]                                                    | Specify an ERC-20 contract to use (see below)
+
+### ERC-20 commands
+
+Command          | Arguments                                                                                 | Description
+-----------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------
+--erc20          | _contractAddr_ [--abi _abiOrFile_]                                                        | Specify an ERC-20 contract to use (see below)
+--gettokendata   | --erc20 _contractAddr_ [--abi _abiOrFile_]                                                | Get token data (name, symbol etc.) from contract, if available
+--getbalance     | _address_ --erc20 _contractAddr_ [--abi _abiOrFile_]                                      | Get any wallet's balance. If address is not specified, it will return the sum of the balance of all your generated wallets
+--sendtoaddress  | _address_ --erc20 _contractAddr_ [--abi _abiOrFile_] --amount _amount_ [--from _fromaddr] | Sends an amount of ERC-20 token to an address
+
 
 ### Global options
 
@@ -57,14 +68,18 @@ Command                   | Arguments                                           
                         provider URL. Default is MyEtherAPI.com mainnet provider.
  * `--testnet`               Alias for `--provider testnet`
  * `--datadir <folder>`      (Optional) Set folder used as wallet storage. Default is ~/.ethereum-cli.
- 	
+
+
 ### First-run options
 
  * `--seed <seed>`           (Optional) Set a custom seed (useful for importing/restoring wallets). If not
                         supplied, one will be generated.
  * `--password <password>`   (Optional) Pre-set a password. If not supplied, it will be requested.
 
-### Example: sending a transaction
+Examples
+--------
+
+### Example 1: sending ether
 
 ```bash
 $ ethereum-cli --getaddress
@@ -74,6 +89,16 @@ $ ethereum-cli --getbalance
 5000
 
 $ ethereum-cli --sendtoaddress 0xtarget --from 0xsample --amount 3000
+0xtransactionID
+```
+
+### Example 2: sending ERC-20 tokens
+
+```bash
+$ ethereum-cli --erc20 0xcontract --abi ./contractabi.json --getbalance
+5000
+
+$ ethereum-cli --erc20 0xcontract --abi ./contractabi.json --sendtoaddress 0xtarget --amount 3000 
 0xtransactionID
 ```
 
@@ -315,7 +340,67 @@ let password = 'your-wallet-password' // choose one or use the previous one
 await myWallet.createKeystore(password, 'your seed')
 ```
 
+ERC-20 library
+--------------
+
+In order to use a ERC-20 library, it's needed to instance the main class (see above).
+
+```javascript
+let myWallet = new EthereumWallet()
+await myWallet.init()
+```
+
+### Contract instance
+
+You can have multiple contracts instance. Each contract interface is generated through a constructor.
+
+```javascript
+let contract = myWallet.Erc20(contractAddress, contractAbi)
+```
+
+The contract address must be a string. The contract ABI can be either a string containing the location of a file containing the contract ABI or the ABI object itself. If not provided or `null`, a standard ABI will be used.
+
+### Getting token information
+
+The lib also provides async getters that returns the token information.
+
+**Warning**: storing token information on the contract is not covered by ERC-20 standards. Therefore, this feature may fail in several contracts. We recommend using try/catch or gathering these information from the ABI.
+
+```javascript
+let contractName = await contract.name // "FakeCoin"
+let contractSymbol = await contract.symbol // "FAKE"
+let contractDecimals = await contract.decimals // 18
+let contractTotalSupply = await contract.totalSupply // 2100000000000000000000000
+```
+
+**Note**: sequentially using await is bad practice ("async/await hell"). [Read more.](https://medium.freecodecamp.org/avoiding-the-async-await-hell-c77a0fb71c4c)
+
+### Getting an address's balance
+
+```javascript
+let balance = await contract.balanceOf(address, minconf) // 1000000000000000000
+```
+
+The first argument must be a string. The second argument is optional (if not provided, it will be zero).
+
+### Sending tokens
+
+```javascript
+let txid = await contract.transfer(to, amount, {
+	from: '0xfrom',
+	gasPrice: 'optional',
+	gasLimit: 'optional'
+	})
+```
+
+Setting gasPrice and gasLimit are optional. If not provided, it will be estimated.
+
+Amount is given on the lowest unit. For a token with 18 decimals, 1 token = 1e18 (1000000000000000000).
+
+This function throws/rejects on error. Since it is async, you can either use try/catch or Promise.catch().
+
 Todo
 ----
 
-* Smart contracts support, ERC20 tokens support (soon)
+- [ ] ERC20 tokens support (60% done)
+- [ ] Smart contracts support
