@@ -1,6 +1,6 @@
 {
   "name": "node-ethereum-wallet",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Command-line light wallet for Ethereum",
   "main": "lib/index.js",
   "bin": {
@@ -21,7 +21,7 @@
     "password-prompt": "^1.0.6",
     "underscore": "^1.9.1",
     "update-check": "^1.5.2",
-    "web3": "^1.0.0-beta.34"
+    "web3": "^1.5.1"
   },
   "devDependencies": {},
   "scripts": {
