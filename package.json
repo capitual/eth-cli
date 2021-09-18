@@ -1,6 +1,6 @@
 {
   "name": "node-ethereum-wallet",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Command-line light wallet for Ethereum",
   "main": "lib/index.js",
   "bin": {
