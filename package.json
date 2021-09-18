@@ -21,7 +21,7 @@
     "password-prompt": "^1.0.6",
     "underscore": "^1.9.1",
     "update-check": "^1.5.2",
-    "web3": "^1.5.1"
+    "web3": "^1.5.2"
   },
   "devDependencies": {},
   "scripts": {
