@@ -13,7 +13,7 @@
     "async": "^2.6.1",
     "command-line-usage": "^5.0.5",
     "erc20-contract-js": "^1.1.1",
-    "eth-lightwallet": "^3.0.1",
+    "eth-lightwallet": "^4.0.0",
     "ethereum-tx-decoder": "^2.0.1",
     "ethjs-provider-signer": "^0.1.4",
     "node-cmdline-parser": "^1.0.2",
@@ -23,7 +23,6 @@
     "update-check": "^1.5.2",
     "web3": "^1.5.2"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "./bin/index.js",
     "postinstall": "chmod +x ./bin/index.js"
