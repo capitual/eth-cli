@@ -10,7 +10,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "async": "^2.6.1",
+    "async": "^3.2.2",
     "command-line-usage": "^5.0.5",
     "erc20-contract-js": "^1.1.1",
     "eth-lightwallet": "^3.0.1",
